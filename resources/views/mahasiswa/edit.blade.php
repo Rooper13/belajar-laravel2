@@ -14,14 +14,12 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="*" method="POST" enctype="multipart/form-data">
+                        <form action="/mhs/update" method="POST" enctype="multipart/form-data">
                         
                             @csrf
-
                             <div class="form-group">
                                 <label class="font-weight-bold">NRP</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Post">
-                            
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="NRP" value="*" placeholder="Masukkan Judul Post">
                                 <!-- error message untuk title -->
                                 @error('image')
                                     <div class="alert alert-danger mt-2">
@@ -32,7 +30,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">NAMA</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Post">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="Nama" value="*" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk title -->
                                 @error('title')
@@ -43,8 +41,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Nohp</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Judul Post">
+                                <label class="font-weight-bold">ALAMAT</label>
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="ALAMAT" value="*" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk content -->
                                 @error('content')
@@ -54,9 +52,22 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label class="font-weight-bold">Nohp</label>
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="No_hp" value="*" placeholder="Masukkan Judul Post">
+                            
+                                <!-- error message untuk content -->
+                                @error('content')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            
+
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
-
                         </form> 
                     </div>
                 </div>

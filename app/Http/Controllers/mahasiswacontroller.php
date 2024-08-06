@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\DB;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Models\mahasiswa;
 use Illuminate\Http\Request;
 
 class mahasiswacontroller extends Controller
@@ -13,7 +14,8 @@ class mahasiswacontroller extends Controller
      */
     public function index()
     {
-        return view('mahasiswa.mahasiswa');
+        $mhs = DB::table('mahasiswa')->get();
+        return view('mahasiswa/show',['mhs' => $mhs]);
     }
 
     /**
@@ -51,8 +53,8 @@ class mahasiswacontroller extends Controller
      */
     public function edit(string $id)
     {
-        DB::table('mahasiswa')-> where('id', $id)-> get();
-        return view('mahasiswa/show');
+       $mhs= DB::table('mahasiswa')-> where('id', $id)-> get();
+        return view('mahasiswa/edit',['mhs' => $mhs]);
     }
 
     /**
@@ -66,6 +68,7 @@ class mahasiswacontroller extends Controller
             'ALAMAT'=> $request->ALAMAT,
             'No_hp'=> $request->No_hp
         ]);
+        return view('mahasiswa');
     }
 
     /**
