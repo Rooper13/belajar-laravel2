@@ -31,5 +31,5 @@ Route::get('/edit', function(){
 Route::post('/store', 'App/Http/Controllers/mahasiswacontroller@insert');
 Route::post('/insert', [mahasiswacontroller::class, 'insert']);
 Route::get('/', [mahasiswacontroller::class, 'index']);
-Route::get('/edit', [mahasiswacontroller::class, 'edit']);
-//Route::post('/mhs/update', [mahasiswacontroller::class, 'update']);
+Route::post('/edit', [mahasiswacontroller::class, 'edit'])->name('edit');
+Route::post('/mhs/update', [mahasiswacontroller::class, 'update'])->name('update');

@@ -19,7 +19,7 @@
                             @csrf
                             <div class="form-group">
                                 <label class="font-weight-bold">NRP</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="NRP" value="*" placeholder="Masukkan Judul Post">
+                                <input type="number" class="form-control @error('title') is-invalid @enderror" name="NRP" value="{{$mhs->NRP}}" placeholder="Masukkan Judul Post">
                                 <!-- error message untuk title -->
                                 @error('image')
                                     <div class="alert alert-danger mt-2">
@@ -30,7 +30,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">NAMA</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="Nama" value="*" placeholder="Masukkan Judul Post">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="Nama" value="<?= $mhs->Nama ?>" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk title -->
                                 @error('title')
@@ -42,7 +42,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">ALAMAT</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="ALAMAT" value="*" placeholder="Masukkan Judul Post">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="ALAMAT" value="<?= $mhs->ALAMAT ?>" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk content -->
                                 @error('content')
@@ -54,7 +54,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Nohp</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="No_hp" value="*" placeholder="Masukkan Judul Post">
+                                <input type="number" class="form-control @error('title') is-invalid @enderror" name="No_hp" value="<?= $mhs->No_hp ?>" placeholder="Masukkan Judul Post">
                             
                                 <!-- error message untuk content -->
                                 @error('content')

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class mahasiswacontroller extends Controller
 {
@@ -15,7 +16,7 @@ class mahasiswacontroller extends Controller
     public function index()
     {
         $mhs = DB::table('mahasiswa')->get();
-        return view('mahasiswa/show',['mhs' => $mhs]);
+        return view('mahasiswa/show', ['mhs' => $mhs]);
     }
 
     /**
@@ -23,11 +24,11 @@ class mahasiswacontroller extends Controller
      */
     public function insert(Request $request)
     {
-            DB::table('mahasiswa')->insert([
+        DB::table('mahasiswa')->insert([
             'NRP' => $request->NRP,
             'Nama' => $request->Nama,
-            'ALAMAT'=> $request->ALAMAT,
-            'No_hp'=> $request->No_hp
+            'ALAMAT' => $request->ALAMAT,
+            'No_hp' => $request->No_hp
         ]);
         return redirect('/mahasiswa');
     }
@@ -51,24 +52,36 @@ class mahasiswacontroller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $req)
     {
-       $mhs= DB::table('mahasiswa')-> where('id', $id)-> get();
-        return view('mahasiswa/edit',['mhs' => $mhs]);
+        //    $mhs= DB::table('mahasiswa')->where('id', $req->input('nrp'))->get();
+        $mhs = DB::Selectone("
+            SELECT
+                *
+            FROM
+                mahasiswa
+            WHERE
+                nrp = '" . $req->input('nrp') . "'
+       ");
+
+        return view('mahasiswa/edit', ['mhs' => $mhs]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        DB::table('mahasiswa')->where('id',$request->id)->update([
-            'NRP' => $request->NRP,
-            'Nama' => $request->Nama,
-            'ALAMAT'=> $request->ALAMAT,
-            'No_hp'=> $request->No_hp
+        // dd($request);
+       $mhs = DB::table('mahasiswa')->where('NRP',$request->input('NRP'))->update([
+            'NRP' => $request->input('NRP'),
+            'Nama' => $request->input('Nama'),
+            'ALAMAT' => $request->input('ALAMAT'),
+            'No_hp' => $request->input('No_hp')
         ]);
-        return view('mahasiswa');
+        //dd($mhs);
+        // return view('mahasiswa/edit', ['mhs' => $mhs]);
+        return view('mahasiswa/show', ['mhs' => $mhs]);
     }
 
     /**
@@ -76,7 +89,7 @@ class mahasiswacontroller extends Controller
      */
     public function destroy(Request $request)
     {
-        DB::table('mahasiswa')->where('id', $request->id)->delete();
+        DB::table('mahasiswa')->where('nrp', $request->input('jack'))->delete();
         return redirect()->back();
     }
 }
